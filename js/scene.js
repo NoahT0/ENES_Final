@@ -10,6 +10,7 @@ class SceneManager
         if(this.curScene)
         {
             this.curScene.deleteWarningText = false;
+            this.curScene.onExit();
             this.curScene.destroy();
             //this.curScene.graphics.visible = false;
         }
@@ -63,6 +64,10 @@ class Scene
         .off('pointerup', this.onClickEndBound)
         .off('pointerupoutside', this.onClickEndBound)
         .off('pointermove', this.onPointerMoveBound);
+    }
+    onExit()
+    {
+
     }
     onClick(event) {
         if (this.dragging) return;

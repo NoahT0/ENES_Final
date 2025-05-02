@@ -8,7 +8,7 @@ class Mortar extends CContainer
         this.sulfurFront = new CSprite('../Images/sulfurSide.png', 0.25, 0.85, 0.18,0, Tags.SULFUR_FRONT, false);
         this.saltpeterFront = new CSprite('../Images/saltpeterFront.png', 0.4, 0.84, 0.2,0, Tags.SALTPETER_FRONT, false);
         this.charcoalFront = new CSprite('../Images/charcoalFront.png', 0.57, 0.84, 0.19,0, Tags.CHARCOAL_FRONT, false);
-        this.gunpowder = new CSprite('../Images/gunpowder.png', 0.12, 0.84, 0.7,0, Tags.GUNPOWDER, false);
+        this.gunpowder = new CSprite('../Images/gunpowderPaste.png', 0.17, 0.84, 0.6,0, Tags.GUNPOWDER, false);
         this.pestle = new CSprite('../Images/pestle.png', 0.1,0.3,0.3,1.5, false);
         this.mortarFront = new CSprite('../Images/MortarFinal2.png', 0,0,1,1, Tags.NA, false);
         this.addSprite(this.mortarBack);
@@ -24,12 +24,26 @@ class Mortar extends CContainer
         this.cleanUpClouds = true;
 
         this.heightChange = 10;
-        this.gunpowderChange = 25;
+        this.gunpowderChange = 15;
         this.sulfurAmount = 0;
         this.saltpeterAmount = 0;
         this.charcoalAmount = 0;
         this.gunpowderAmount = 0;
         
+    }
+    hideMortar()
+    {
+        this.mortarBack.visible = false;
+        this.mortarBack2.visible = false;
+        this.mortarFront.visible = false;
+        this.pestle.visible = false;
+    }
+    showMortar()
+    {
+        this.mortarBack.visible = true;
+        this.mortarBack2.visible = true;
+        this.mortarFront.visible = true;
+        this.pestle.visible = true;
     }
     convertToGunpowder()
     {

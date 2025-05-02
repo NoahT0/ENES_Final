@@ -17,7 +17,7 @@ function start()
     console.log(app);
     document.body.appendChild(app.view);
     input = new InputManager();
-    sceneManager = new SceneManager(new Measuring());
+    sceneManager = new SceneManager(new Sieve());
     console.log(getScreenWidth());
     
     ticker.start();

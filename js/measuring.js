@@ -7,7 +7,7 @@ class WoodenRoom extends Scene
         this.table = this.addNewSprite('../Images/medievalTable.png', 0.6, 0.6, 0.5,0.5);
         this.sulfurFront = this.addDraggableSpriteDuplicate('../Images/sulfurSide.png', 0.65, 0.68, 0.1,0.1, Tags.SULFUR_FRONT);
         this.saltpeterFront = this.addDraggableSpriteDuplicate('../Images/saltpeterFront.png', 0.73, 0.65, 0.15,0.15, Tags.SALTPETER_FRONT);
-        this.charcoalFront = this.addNewDraggableSprite('../Images/charcoalFront.png', 0.85, 0.65, 0.12,0.17, Tags.CHARCOAL_FRONT);
+        this.charcoalFront = this.addDraggableSpriteDuplicate('../Images/charcoalFront.png', 0.85, 0.65, 0.12,0.17, Tags.CHARCOAL_FRONT);
         this.artisan = this.addNewSprite('../Images/artisan.png', 0.4, 0.15, 0.25);
         this.artisanArm = this.addNewSprite('../Images/artisanArm.png', 0.39, 0.37, 0.04);
         this.hangingScale = new HangingScale(0.37, 0, 0.3,0.3);
@@ -18,7 +18,6 @@ class WoodenRoom extends Scene
         this.graphics.addChild(this.mortar);
 
         this.resetButton = this.addButton(0.68,0.02,0.1,0.06, 'Reset', 0xff0000, textStyle, Tags.RESET_BUTTON);
-        this.nextButton = this.addButton(0.83,0.02,0.1,0.06, 'Next', 0xff0000, textStyle, Tags.NEXT_BUTTON);
         
     }
     setArmLengthAndRotation(dx, dy)
@@ -37,7 +36,8 @@ class Measuring extends WoodenRoom
     {
         super();
         this.mortar.pestle.visible = false;
-
+        this.nextButtonManual = this.addButton(0.83,0.02,0.12,0.06, 'Next(Manual)', 0xff0000, textStyle, Tags.NEXT_BUTTON);
+        this.nextButtonRunners = this.addButton(0.83,0.12,0.12,0.06, 'Next(Runner)', 0xff0000, textStyle, Tags.NEXT_BUTTON2);
         this.instructions = this.addText('Drag ingredients on to scale to measure out proportions.\nOnce desired quantity is met click on scale to move ingredient to mortar.', textStyle);
         this.labelText = this.addText('Sulfur           Saltpeter          Charcoal', textStyle, 0.67, 0.78);
         
@@ -69,6 +69,19 @@ class Measuring extends WoodenRoom
                 else
                 {
                     sceneManager.switchScene(new HandMixing(this.mortar.sulfurAmount, this.mortar.saltpeterAmount, this.mortar.charcoalAmount));
+                    return;
+                }
+            }
+            else if(button.tag === Tags.NEXT_BUTTON2)
+            {
+                if(this.mortar.ingredientMissing())
+                {
+                    this.displayWarning('One or more ingredient missing. Add them before continuing.', 3, 0.2,0.5);
+
+                }
+                else
+                {
+                    sceneManager.switchScene(new Mill(this.mortar.sulfurAmount, this.mortar.saltpeterAmount, this.mortar.charcoalAmount));
                     return;
                 }
             }

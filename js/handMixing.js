@@ -9,6 +9,7 @@ class HandMixing extends WoodenRoom
         this.defaultCharcoal = charcoalAmount;
         this.setDefaultPowder();
         this.backButton = this.addButton(0.01,0.02,0.1,0.06, 'Back', 0xff0000, textStyle, Tags.BACK_BUTTON);
+        this.nextButton = this.addButton(0.83,0.02,0.1,0.06, 'Next', 0xff0000, textStyle, Tags.NEXT_BUTTON);
         this.instructions = this.addText('Move Pestle up and down to mix ingredients.', textStyle);
         this.backgroundPestle.visible = false;
         this.distSum = 0;
@@ -41,7 +42,6 @@ class HandMixing extends WoodenRoom
             }
             else if(button.tag === Tags.BACK_BUTTON)
             {
-                this.mortar.cleanUpClouds = false;
                 sceneManager.switchScene(new Measuring());
                 
             }
@@ -55,6 +55,11 @@ class HandMixing extends WoodenRoom
             
         }
        
+    }
+    onExit()
+    {
+        super.onExit();
+        this.mortar.cleanUpClouds = false;
     }
     
     onPointerMove(event) {
