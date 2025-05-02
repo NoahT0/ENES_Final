@@ -3,9 +3,10 @@ const Tags = Object.freeze({
     SULFUR_FRONT: 0,
     SALTPETER_FRONT: 1,
     CHARCOAL_FRONT: 2,
-    RESET_BUTTON: 3,
-    NEXT_BUTTON: 4,
-    BACK_BUTTON: 5
+    GUNPOWDER: 3,
+    RESET_BUTTON: 4,
+    NEXT_BUTTON: 5,
+    BACK_BUTTON: 6
 });
 class CSprite extends PIXI.Sprite 
 {

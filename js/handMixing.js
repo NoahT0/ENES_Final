@@ -11,13 +11,19 @@ class HandMixing extends WoodenRoom
         this.backButton = this.addButton(0.01,0.02,0.1,0.06, 'Back', 0xff0000, textStyle, Tags.BACK_BUTTON);
         this.instructions = this.addText('Move Pestle up and down to mix ingredients.', textStyle);
         this.backgroundPestle.visible = false;
+        this.distSum = 0;
+        this.dustThreshold = 500; // Distance needed for making dust
+        this.dustCount = 0;
+        this.powderThreshold = 3; // Number of dust clouds for one conversion into gunpowder
         
     }
     setDefaultPowder()
     {
+        this.mortar.reset();
         this.mortar.addPowder(this.defaultSulfur, Tags.SULFUR_FRONT);
         this.mortar.addPowder(this.defaultSaltpeter, Tags.SALTPETER_FRONT);
         this.mortar.addPowder(this.defaultCharcoal, Tags.CHARCOAL_FRONT);
+
     }
     update(dt)
     {
@@ -35,11 +41,16 @@ class HandMixing extends WoodenRoom
             }
             else if(button.tag === Tags.BACK_BUTTON)
             {
+                this.mortar.cleanUpClouds = false;
                 sceneManager.switchScene(new Measuring());
+                
             }
             else if(button.tag === Tags.NEXT_BUTTON)
             {
-                
+                if(!this.mortar.fullyConverted())
+                {
+                   this.displayWarning('Ingredients not fully converted to gunpowder yet.', 3, 0.3, 0.5);
+                }
             }
             
         }
@@ -65,9 +76,20 @@ class HandMixing extends WoodenRoom
         const endX = this.artisanArm.x - xLength;
         const endY = this.artisanArm.y + yLength * 0.8 - 20;
 
+        this.distSum += Math.abs(endY - this.mortar.pestle.y);
+        if(this.distSum > this.dustThreshold)
+        {
+            this.distSum = 0;
+            this.mortar.makeDustCloud();
+            this.dustCount ++;
+            if(this.dustCount % this.powderThreshold === 0)
+            {
+                this.mortar.convertToGunpowder();
+            }
+        }
         this.mortar.pestle.x = endX;
         this.mortar.pestle.y = endY;
-
+        
         super.onPointerMove(event);
 
     }

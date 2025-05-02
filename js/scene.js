@@ -9,6 +9,7 @@ class SceneManager
     {
         if(this.curScene)
         {
+            this.curScene.deleteWarningText = false;
             this.curScene.destroy();
             //this.curScene.graphics.visible = false;
         }
@@ -42,6 +43,8 @@ class Scene
         this.buttons = [];
 
         app.stage.interactive = true;
+
+        this.deleteWarningText = true; // For when scene is deleted during timeout
 
         this.onClickBound = this.onClick.bind(this);
         this.onClickEndBound = this.onClickEnd.bind(this);
@@ -135,8 +138,12 @@ class Scene
         this.graphics.addChild(warningText);
 
         setTimeout(() => {
-            this.graphics.removeChild(warningText);
-            warningText.destroy();
+            if(this.deleteWarningText)
+            {
+                this.graphics.removeChild(warningText);
+                warningText.destroy();
+            }
+            
         }, duration * 1000);
     }
     addButton(xPos, yPos, width, height, message, color = 0x0000FF, style = textStyle, tag = Tags.NA)
