@@ -17,7 +17,7 @@ function start()
     console.log(app);
     document.body.appendChild(app.view);
     input = new InputManager();
-    sceneManager = new SceneManager(new Sieve());
+    sceneManager = new SceneManager(new GuineaGun(18,85,18,true));
     console.log(getScreenWidth());
     
     ticker.start();

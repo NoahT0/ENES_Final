@@ -7,7 +7,10 @@ const Tags = Object.freeze({
     RESET_BUTTON: 4,
     NEXT_BUTTON: 5,
     NEXT_BUTTON2: 6,
-    BACK_BUTTON: 7
+    NEXT_BUTTON3: 7,
+    NEXT_BUTTON4: 8,
+    BACK_BUTTON: 9
+
 });
 class CSprite extends PIXI.Sprite 
 {

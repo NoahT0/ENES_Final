@@ -8,8 +8,9 @@ class HandMixing extends WoodenRoom
         this.defaultSaltpeter = saltpeterAmount;
         this.defaultCharcoal = charcoalAmount;
         this.setDefaultPowder();
-        this.backButton = this.addButton(0.01,0.02,0.1,0.06, 'Back', 0xff0000, textStyle, Tags.BACK_BUTTON);
-        this.nextButton = this.addButton(0.83,0.02,0.1,0.06, 'Next', 0xff0000, textStyle, Tags.NEXT_BUTTON);
+        this.addButton(0.01,0.02,0.1,0.06, 'Back', 0xff0000, textStyle, Tags.BACK_BUTTON);
+        this.addButton(0.83,0.02,0.1,0.06, 'Next(Large)', 0xff0000, textStyle, Tags.NEXT_BUTTON);
+        this.addButton(0.83,0.12,0.1,0.06, 'Next(Small)', 0xff0000, textStyle, Tags.NEXT_BUTTON2);
         this.instructions = this.addText('Move Pestle up and down to mix ingredients.', textStyle);
         this.backgroundPestle.visible = false;
         this.distSum = 0;
@@ -50,6 +51,21 @@ class HandMixing extends WoodenRoom
                 if(!this.mortar.fullyConverted())
                 {
                    this.displayWarning('Ingredients not fully converted to gunpowder yet.', 3, 0.3, 0.5);
+                }
+                else
+                {
+                    sceneManager.switchScene(new Sieve(this.defaultSulfur, this.defaultSaltpeter, this.defaultCharcoal, false, true));
+                }
+            }
+            else if(button.tag === Tags.NEXT_BUTTON2)
+            {
+                if(!this.mortar.fullyConverted())
+                {
+                   this.displayWarning('Ingredients not fully converted to gunpowder yet.', 3, 0.3, 0.5);
+                }
+                else
+                {
+                    sceneManager.switchScene(new Sieve(this.defaultSulfur, this.defaultSaltpeter, this.defaultCharcoal, true, true));
                 }
             }
             
