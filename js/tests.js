@@ -16,6 +16,7 @@ class TestSelector extends Scene
           });
 
         this.addText('Select test:', tempStyle, 0.2, 0.3);
+        this.addText('Hint: 70% saltpeter may be a cut off', textStyle, 0.7, 0.9);
         this.addGunpowderStats();
         this.addButton(0.01,0.02,0.1,0.06, 'Back', 0xff0000, textStyle, Tags.BACK_BUTTON);
         this.addButton(0.2,0.5,0.1, 0.06, 'Flintlock', 0xff0000, textStyle, Tags.NEXT_BUTTON);
